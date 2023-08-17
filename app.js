@@ -4,12 +4,12 @@ var app = express();
 
 global.__basedir = __dirname;
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 require('./routes')(app);
 require('./plugins/db')(app);
 
 app.get('/', function (req, res) {
-  // res.setHeader('Access-Control-Allow-Credentials',"true");
+  res.setHeader('Access-Control-Allow-Credentials',"true");
   res.send('Received client request');
 });
 
