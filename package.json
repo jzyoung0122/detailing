@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "dev": "nodemon server/app.js",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start":"npm run dev"
   },
   "dependencies": {
     "api": "^5.0.8",
