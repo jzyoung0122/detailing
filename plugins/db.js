@@ -1,6 +1,8 @@
 module.exports = (app) => {
     const mongoose = require('mongoose');
-    mongoose.connect('mongodb://127.0.0.1:27017/dbecommerce', {
+    require('dotenv').config()
+    process.env.authURI
+    mongoose.connect(process.env.authURI, {
     //   useNewUrlParser: true,
     //   useFindAndModify: false,
       useUnifiedTopology: true,
