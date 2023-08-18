@@ -1,28 +1,24 @@
+var path=require("path")
 var express = require('express');
-var cors=require("cors")
 var app = express();
-
 global.__basedir = __dirname;
 app.use(express.json());
-app.use(cors());
+app.use(express.static('dist'))
+
+app.use(express.static(path.join(__dirname,'./dist')))
+// // app.use(history())
+
 require('./routes')(app);
 require('./plugins/db')(app);
 
-app.all('*',function(req,res,next){
-   
- 
-    res.header("Access-Control-Allow-Origin","*");
-    res.header("Access-Control-Allow-Methods","PUT,GET,POST,DELETE,OPTIONS");
-    // res.header("Access-Control-Allow-Headers","X-Requestd-With");
-    res.header("Access-Control-Allow-Headers","Content-Type");
-    next()
-});
+// app.get('/', function (req, res) {
+//   res.send('Received client request');
+// });
 
 
-app.get('/', function (req, res) {
-  res.setHeader('Access-Control-Allow-Credentials',"true");
-  res.send('Received client request');
-});
+app.get('./*', (req,res)=>{
+ res.sendFile((__dirname+'./dist/index.html'))
+})
 
 
 app.listen(8081, function () {
