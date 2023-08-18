@@ -368,7 +368,7 @@ module.exports=(app)=>{
     //         "Plastics & rubbers glossed",
     //         "Non-Greasy Tyre Shine Applied"
     //     ]
-    })
+    // })
 
     
 }
