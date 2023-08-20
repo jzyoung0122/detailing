@@ -94,76 +94,47 @@ module.exports=(app)=>{
         let checkboxGroup2=req.body.checkboxGroup2
         let checkboxGroup3=req.body.checkboxGroup3
 
-        // const availableTime=await ChosenDate.findOne({date:chosenDate})
-        // if(availableTime.period.includes(chosenTime)){
-        //     const booking= await Booking.create({
-        //         date:chosenDate,
-        //         time:chosenTime,
-        //         sedanServices:checkboxGroup1,
-        //         suvServices:checkboxGroup2,
-        //         vanServices:checkboxGroup3,
-        //         firstName:form.firstName,
-        //         lastName:form.lastName,
-        //         phoneNumber:form.phoneNumber,
-        //         email:form.email,
-        //         address:{
-        //          address1:form.address1,
-        //          address2:form.address2,
-        //          suburb:form.suburb,
-        //          state:form.state,
-        //          postCode:form.postCode
-        //         },
-        //         totalTime:totalTime,
-        //         delete:false
-        //      })
+        const availableTime=await ChosenDate.findOne({date:chosenDate})
+        if(availableTime.period.includes(chosenTime)){
+            const booking= await Booking.create({
+                date:chosenDate,
+                time:chosenTime,
+                sedanServices:checkboxGroup1,
+                suvServices:checkboxGroup2,
+                vanServices:checkboxGroup3,
+                firstName:form.firstName,
+                lastName:form.lastName,
+                phoneNumber:form.phoneNumber,
+                email:form.email,
+                address:{
+                 address1:form.address1,
+                 address2:form.address2,
+                 suburb:form.suburb,
+                 state:form.state,
+                 postCode:form.postCode
+                },
+                totalTime:totalTime,
+                delete:false
+             })
      
-        //      const date= await ChosenDate.findOne({date:chosenDate})
-        //      let period=date.period
+             const date= await ChosenDate.findOne({date:chosenDate})
+             let period=date.period
              
-        //      for(let i=chosenTime;i<chosenTime+totalTime+1;i++){
-        //          removeWithoutCopy(period,i)
-        //       }
+             for(let i=chosenTime;i<chosenTime+totalTime+1;i++){
+                 removeWithoutCopy(period,i)
+              }
      
-        //      await ChosenDate.updateOne({date:chosenDate},{period:period})
-        //      res.send({message:"success",flag:true})
+             await ChosenDate.updateOne({date:chosenDate},{period:period})
+             res.send({message:"success",flag:true})
 
-        // }else{
-        //     console.log("unavailable")
-        //     res.send({message:"sorry,seems like the time has been chosen by someone else before you submit",
-        //     flag:false})
+        }else{
+            console.log("unavailable")
+            res.send({message:"sorry,seems like the time has been chosen by someone else before you submit",
+            flag:false})
             
-        // }
+        }
 
-        const booking= await Booking.create({
-                    date:chosenDate,
-                    time:chosenTime,
-                    sedanServices:checkboxGroup1,
-                    suvServices:checkboxGroup2,
-                    vanServices:checkboxGroup3,
-                    firstName:form.firstName,
-                    lastName:form.lastName,
-                    phoneNumber:form.phoneNumber,
-                    email:form.email,
-                    address:{
-                     address1:form.address1,
-                     address2:form.address2,
-                     suburb:form.suburb,
-                     state:form.state,
-                     postCode:form.postCode
-                    },
-                    totalTime:totalTime,
-                    delete:false
-                 })
-         
-                 const date= await ChosenDate.findOne({date:chosenDate})
-                 let period=date.period
-                 
-                 for(let i=chosenTime;i<chosenTime+totalTime+1;i++){
-                     removeWithoutCopy(period,i)
-                  }
-         
-                 await ChosenDate.updateOne({date:chosenDate},{period:period})
-                 res.send({message:"success",flag:true})
+        
        
     })
 
